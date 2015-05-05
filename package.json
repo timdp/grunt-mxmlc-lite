@@ -1,0 +1,42 @@
+{
+  "name": "grunt-mxmlc-lite",
+  "version": "0.1.0",
+  "description": "Runs the Flex SDK mxmlc compiler with a prebuilt configuration file.",
+  "author": "Tim De Pauw <hi@tmdpw.eu> (https://tmdpw.eu/)",
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "main": "Gruntfile.js",
+  "files": [
+    "Gruntfile.js",
+    "tasks/mxmlc-lite.js"
+  ],
+  "scripts": {
+    "test": "node node_modules/standard/bin/cmd.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/timdp/grunt-mxmlc-lite"
+  },
+  "bugs": {
+    "url": "https://github.com/timdp/grunt-mxmlc-lite/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://raw.githubusercontent.com/timdp/grunt-mxmlc-lite/master/LICENSE"
+    }
+  ],
+  "dependencies": {
+    "es6-promise": "^2.1.1",
+    "es6-promisify": "^1.1.1",
+    "flex-sdk-provider": "^0.1.1",
+    "playerglobal-latest": "^0.1.7"
+  },
+  "devDependencies": {
+    "standard": "^3.7.3"
+  },
+  "keywords": [
+    "gruntplugin"
+  ]
+}
