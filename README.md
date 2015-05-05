@@ -2,16 +2,6 @@
 
 Runs the Flex SDK `mxmlc` compiler with a prebuilt configuration file.
 
-## Rationale
-
-This plugin differs from [grunt-mxmlc](https://www.npmjs.com/package/grunt-mxmlc)
-(nothing wrong with that one, by the way) in that it only supports passing a
-prebuilt configuration file rather than dynamically creating a configuration
-object from the Gruntfile. Additionally, it relies on
-[flex-sdk-provider](https://www.npmjs.com/package/flex-sdk-provider) rather than
-[flex-sdk](https://www.npmjs.com/package/flex-sdk) to work around
-[SemVer issues](https://github.com/mojombo/semver/issues/242).
-
 ## Usage
 
 ```js
@@ -28,6 +18,16 @@ grunt.initConfig({
 You can use any `version`
 [supported](https://github.com/timdp/flex-sdk-provider/blob/master/versions.json)
 by flex-sdk-provider.
+
+## Why Another Plugin?
+
+This plugin differs from [grunt-mxmlc](https://www.npmjs.com/package/grunt-mxmlc)
+(nothing wrong with that one, by the way) in that it only supports passing a
+prebuilt configuration file rather than dynamically creating a configuration
+object from the Gruntfile. Additionally, it relies on
+[flex-sdk-provider](https://www.npmjs.com/package/flex-sdk-provider) rather than
+[flex-sdk](https://www.npmjs.com/package/flex-sdk) to work around
+[SemVer issues](https://github.com/mojombo/semver/issues/242).
 
 ## Author
 
