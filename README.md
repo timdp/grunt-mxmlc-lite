@@ -1,4 +1,4 @@
-# grunt-mxmlc-lite [![npm](https://img.shields.io/npm/v/grunt-mxmlc-lite.svg)](https://www.npmjs.com/package/grunt-mxmlc-lite) [![JavaScript Standard Style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](https://github.com/feross/standard)
+# grunt-mxmlc-lite [![npm](https://img.shields.io/npm/v/grunt-mxmlc-lite.svg)](https://www.npmjs.com/package/grunt-mxmlc-lite) [![Build Status](https://img.shields.io/travis/timdp/grunt-mxmlc-lite.svg)](https://travis-ci.org/timdp/grunt-mxmlc-lite) [![JavaScript Standard Style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](https://github.com/feross/standard)
 
 Runs the Flex SDK `mxmlc` compiler with a prebuilt configuration file.
 
