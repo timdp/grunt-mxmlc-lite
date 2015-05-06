@@ -1,7 +1,6 @@
 'use strict'
 
 var flexProvider = require('flex-sdk-provider')
-var pgLatest = require('playerglobal-latest')
 var Promise = require('es6-promise').Promise
 var promisify = require('es6-promisify')
 var os = require('os')
@@ -12,7 +11,6 @@ module.exports = function (grunt) {
   var mxmlc = 'mxmlc' + (isWindows ? '.exe' : '')
 
   var gSpawn = promisify(grunt.util.spawn)
-  var pgInstall = promisify(pgLatest.install)
 
   var spawn = function (opt) {
     return gSpawn(opt)
@@ -24,13 +22,8 @@ module.exports = function (grunt) {
   }
 
   var build = function (file, opt) {
-    var sdkPath
     return flexProvider.get(opt.version)
-      .then(function (_sdkPath) {
-        sdkPath = _sdkPath
-        return pgInstall(sdkPath)
-      })
-      .then(function () {
+      .then(function (sdkPath) {
         var cmd = path.join(sdkPath, 'bin', mxmlc)
         var args = ['-load-config+=' + file.src]
         grunt.verbose.writeln('Compiling ' + file.src + ' using ' + cmd)
