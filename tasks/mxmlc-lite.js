@@ -3,31 +3,78 @@
 var flexProvider = require('flex-sdk-provider')
 var Promise = require('es6-promise').Promise
 var promisify = require('es6-promisify')
-var os = require('os')
+var fs = require('fs')
 var path = require('path')
+var os = require('os')
+
+var stat = promisify(fs.stat)
 
 module.exports = function (grunt) {
-  var isWindows = /^win/.test(os.platform())
-  var mxmlc = 'mxmlc' + (isWindows ? '.exe' : '')
-
   var gSpawn = promisify(grunt.util.spawn)
 
+  var mxmlc = null
+
   var spawn = function (opt) {
+    grunt.verbose.debug('Spawning ' + opt.cmd + ' with args: ' + opt.args)
     return gSpawn(opt)
       .then(function (result, code) {
         if (code) {
           throw new Error('Exit status: ' + code)
         }
+        grunt.verbose.ok('mxmlc exited cleanly')
+      })
+  }
+
+  var findFile = function (dir, candidates) {
+    if (candidates.length === 0) {
+      throw new Error('Failed to locate mxmlc')
+    }
+    var candidate = candidates.shift()
+    var candidatePath = path.join(dir, candidate)
+    return stat(candidatePath)
+      .then(function (stats) {
+        return candidate
+      })
+      .catch(function () {
+        return findFile(dir, candidates)
+      })
+  }
+
+  var determineMxmlcCommand = function (sdkPath) {
+    if (mxmlc !== null) {
+      return
+    }
+    grunt.verbose.writeln('Locating mxmlc')
+    var binDir = path.join(sdkPath, 'bin')
+    var candidates = /^win/.test(os.platform()) ?
+      ['mxmlc.bat', 'mxmlc.cmd', 'mxmlc.exe'] :
+      ['mxmlc']
+    return findFile(binDir, candidates)
+      .then(function (res) {
+        mxmlc = res
+        grunt.verbose.ok('Using mxmlc at ' + path.join(sdkPath, mxmlc))
       })
   }
 
   var build = function (file, opt) {
+    grunt.verbose.writeln('Starting build for ' + file.src +
+      ' with Flex SDK version ' + opt.version)
+    var sdkPath
     return flexProvider.get(opt.version)
-      .then(function (sdkPath) {
+      .then(function (_sdkPath) {
+        sdkPath = _sdkPath
+      })
+      .then(function () {
+        return determineMxmlcCommand(sdkPath)
+      })
+      .then(function () {
         var cmd = path.join(sdkPath, 'bin', mxmlc)
         var args = ['-load-config+=' + file.src]
         grunt.verbose.writeln('Compiling ' + file.src + ' using ' + cmd)
         return spawn({cmd: cmd, args: args})
+      })
+      .then(function () {
+        grunt.log.ok('Build completed for ' + file.src)
       })
   }
 
