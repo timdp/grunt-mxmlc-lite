@@ -1,7 +1,8 @@
 'use strict'
 
+require('es6-promise').polyfill()
+
 var flexProvider = require('flex-sdk-provider')
-var Promise = require('es6-promise').Promise
 var promisify = require('es6-promisify')
 var fs = require('fs')
 var path = require('path')
