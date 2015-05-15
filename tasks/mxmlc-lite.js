@@ -7,6 +7,7 @@ var promisify = require('es6-promisify')
 var fs = require('fs')
 var path = require('path')
 var os = require('os')
+var defaults = require('defaults')
 
 var stat = promisify(fs.stat)
 
@@ -71,6 +72,10 @@ module.exports = function (grunt) {
       .then(function () {
         var cmd = path.join(sdkPath, 'bin', mxmlc)
         var args = ['-load-config+=' + file.src]
+        Object.keys(opt.define).forEach(function (key) {
+          var value = opt.define[key]
+          args.push('-define=' + key + ',' + value)
+        })
         grunt.verbose.writeln('Compiling ' + file.src + ' using ' + cmd)
         return spawn({cmd: cmd, args: args})
       })
@@ -81,7 +86,10 @@ module.exports = function (grunt) {
 
   grunt.registerMultiTask('mxmlc_lite', '', function () {
     var done = this.async()
-    var options = this.options()
+    var options = defaults(this.options(), {
+      version: null,
+      define: {}
+    })
     var compiling = this.files.reduce(function (prev, curr) {
       return prev.then(function () {
         return build(curr, options)
