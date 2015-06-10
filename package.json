@@ -1,6 +1,6 @@
 {
   "name": "grunt-mxmlc-lite",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Runs the Flex SDK mxmlc compiler with a prebuilt configuration file.",
   "author": "Tim De Pauw <hi@tmdpw.eu> (https://tmdpw.eu/)",
   "engines": {
