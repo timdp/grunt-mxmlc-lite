@@ -24,12 +24,12 @@
   "license": "MIT",
   "dependencies": {
     "defaults": "^1.0.2",
-    "es6-promise": "^2.1.1",
-    "es6-promisify": "^1.1.1",
+    "es6-promise": "^3.0.2",
+    "es6-promisify": "^3.0.0",
     "flex-sdk-provider": "^0.6.0"
   },
   "devDependencies": {
-    "standard": "^4.1.0"
+    "standard": "^5.1.1"
   },
   "keywords": [
     "gruntplugin"
