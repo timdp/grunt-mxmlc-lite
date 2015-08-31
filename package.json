@@ -26,7 +26,7 @@
     "defaults": "^1.0.2",
     "es6-promise": "^3.0.2",
     "es6-promisify": "^3.0.0",
-    "flex-sdk-provider": "^0.6.0"
+    "flex-sdk-provider": "^0.6.1"
   },
   "devDependencies": {
     "standard": "^5.1.1"
