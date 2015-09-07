@@ -10,6 +10,7 @@ var os = require('os')
 var defaults = require('defaults')
 
 var stat = promisify(fs.stat)
+var isWindows = /^win/.test(os.platform())
 
 module.exports = function (grunt) {
   var gSpawn = promisify(grunt.util.spawn)
@@ -48,9 +49,8 @@ module.exports = function (grunt) {
     }
     grunt.verbose.writeln('Locating mxmlc')
     var binDir = path.join(sdkPath, 'bin')
-    var candidates = /^win/.test(os.platform()) ?
-      ['mxmlc.bat', 'mxmlc.cmd', 'mxmlc.exe'] :
-      ['mxmlc']
+    var candidates = isWindows ? ['mxmlc.bat', 'mxmlc.cmd', 'mxmlc.exe']
+      : ['mxmlc']
     return findFile(binDir, candidates)
       .then(function (res) {
         mxmlc = res
