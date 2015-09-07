@@ -14,10 +14,7 @@
   "scripts": {
     "test": "node node_modules/standard/bin/cmd.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/timdp/grunt-mxmlc-lite"
-  },
+  "repository": "timdp/grunt-mxmlc-lite",
   "bugs": {
     "url": "https://github.com/timdp/grunt-mxmlc-lite/issues"
   },
