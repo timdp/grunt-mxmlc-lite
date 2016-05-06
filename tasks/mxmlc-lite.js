@@ -1,19 +1,18 @@
 'use strict'
 
-require('es6-promise').polyfill()
-
+var Promise = require('pinkie-promise')
+var pify = require('pify')
+var defaults = require('defaults')
 var flexProvider = require('flex-sdk-provider')
-var promisify = require('es6-promisify')
 var fs = require('fs')
 var path = require('path')
 var os = require('os')
-var defaults = require('defaults')
 
-var stat = promisify(fs.stat)
+var stat = pify(fs.stat)
 var isWindows = /^win/.test(os.platform())
 
 module.exports = function (grunt) {
-  var gSpawn = promisify(grunt.util.spawn)
+  var gSpawn = pify(grunt.util.spawn)
 
   var mxmlc = null
 
