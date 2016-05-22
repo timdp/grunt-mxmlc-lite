@@ -21,7 +21,7 @@
   "license": "MIT",
   "dependencies": {
     "defaults": "^1.0.2",
-    "flex-sdk-provider": "^0.7.1",
+    "flex-sdk-provider": "^0.8.0",
     "pify": "^2.3.0",
     "pinkie-promise": "^2.0.1"
   },
